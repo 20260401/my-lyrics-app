@@ -1,0 +1,22 @@
+version: 2.1
+
+jobs:
+  run-tests:
+    docker:
+      - image: cimg/python:3.11
+    steps:
+      - checkout
+      - run:
+          name: 安装依赖
+          command: |
+            python -m pip install --upgrade pip
+            pip install -r requirements.txt
+      - run:
+          name: 运行单元测试
+          command: |
+            pytest
+
+workflows:
+  test-my-app:
+    jobs:
+      - run-tests
